@@ -8,6 +8,8 @@
 
 html {
   background: #1a0f10;
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -16,11 +18,16 @@ body {
   min-width: 320px;
   background: #1a0f10;
   color: #d9bba9;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body,
 #root {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 * {
