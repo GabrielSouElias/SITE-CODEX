@@ -272,7 +272,7 @@ export default function Fold1Hero() {
               {...getReveal(0.55, 28, 0.7)}
             >
               {
-                "Vinhos premium direto das melhores vin\u00EDcolas da Serra Ga\u00FAcha, com r\u00F3tulo exclusivo e a partir de apenas 60 garrafas."
+                "Vinhos premium direto das melhores vin\u00EDcolas da Serra Ga\u00FAcha, com r\u00F3tulo exclusivo, a partir de apenas 60 garrafas."
               }
             </motion.p>
 

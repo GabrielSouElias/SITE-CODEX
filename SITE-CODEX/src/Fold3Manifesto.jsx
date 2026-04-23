@@ -12,7 +12,7 @@ const MANIFESTO_IMAGES = {
       "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=1200&auto=format&fit=crop&q=80",
     mobile:
       "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=700&auto=format&fit=crop&q=80",
-    alt: "Vinhedo na Serra Gaucha ao amanhecer",
+    alt: "Vinhedo na Serra Gaúcha ao amanhecer",
   },
   exclusividade: {
     desktop:
@@ -26,7 +26,7 @@ const MANIFESTO_IMAGES = {
       "https://images.unsplash.com/photo-1569919659476-f0852f6834b7?w=1200&auto=format&fit=crop&q=80",
     mobile:
       "https://images.unsplash.com/photo-1569919659476-f0852f6834b7?w=700&auto=format&fit=crop&q=80",
-    alt: "Close em garrafa de vinho com rotulo premium",
+    alt: "Close em garrafa de vinho com rótulo premium",
   },
 };
 
@@ -35,8 +35,8 @@ const DECLARATIONS = [
     numeral: "I",
     title: "Origem que se prova no paladar",
     body:
-      "Serra Gaucha, onde a altitude e o clima desenham vinhos de carater unico. Nossos parceiros sao vinicolas premiadas que cultivam uvas nobres ha geracoes — cada garrafa carrega essa historia antes mesmo de carregar o seu nome.",
-    metadata: "SERRA GAUCHA · RS · 29°10'S 51°31'W",
+      "Serra Gaúcha, onde a altitude e o clima desenham vinhos de caráter único. Nossos parceiros são vinícolas premiadas que cultivam uvas nobres há gerações — cada garrafa carrega essa história antes mesmo de carregar o seu nome.",
+    metadata: "SERRA GAÚCHA · RS · 29°10'S 51°31'W",
     image: MANIFESTO_IMAGES.origem,
     figureClassName: "lg:col-span-7",
     textClassName: "lg:col-span-5 lg:col-start-8 lg:pt-24",
@@ -45,8 +45,8 @@ const DECLARATIONS = [
     numeral: "II",
     title: "Raridade por natureza",
     body:
-      "Produzimos em pequenos lotes a partir de apenas sessenta garrafas. Sua marca nao sera uma entre mil — sera unica, finita, pensada para quem compreende que valor se mede em presenca, nao em abundancia.",
-    metadata: "LOTE MINIMO · 60 GARRAFAS · PRODUCAO LIMITADA",
+      "Produzimos em pequenos lotes, a partir de apenas sessenta garrafas. Sua marca não será uma entre mil — será única, finita, pensada para quem compreende que valor se mede em presença, não em abundância.",
+    metadata: "LOTE MÍNIMO · 60 GARRAFAS · PRODUÇÃO LIMITADA",
     image: MANIFESTO_IMAGES.exclusividade,
     figureClassName: "lg:order-2 lg:col-span-6 lg:col-start-7",
     textClassName: "lg:order-1 lg:col-span-5 lg:pt-12",
@@ -55,8 +55,8 @@ const DECLARATIONS = [
     numeral: "III",
     title: "Seu nome, sua identidade, seu vinho",
     body:
-      "Cuidamos de cada detalhe do rotulo a entrega — do design a impressao, da escolha do papel a curadoria dos vinhos. O resultado e uma marca que parece sempre ter existido, porque foi construida com o tempo e o rigor que uma marca premium merece.",
-    metadata: "ROTULO · ENGARRAFAMENTO · ENTREGA",
+      "Cuidamos de cada detalhe, do rótulo à entrega — do design à impressão, da escolha do papel à curadoria dos vinhos. O resultado é uma marca que parece sempre ter existido, porque foi construída com o tempo e o rigor que uma marca premium merece.",
+    metadata: "RÓTULO · ENGARRAFAMENTO · ENTREGA",
     image: MANIFESTO_IMAGES.personalizacao,
     figureClassName: "lg:col-span-6",
     textClassName: "lg:col-span-5 lg:col-start-8 lg:pt-20",
@@ -410,7 +410,7 @@ export default function Fold3Manifesto() {
               {...introReveal(0.35, 25)}
             >
               {
-                "Nascemos da convicção de que vinhos extraordinarios merecem nomes extraordinarios. Trabalhamos lado a lado com as vinicolas mais respeitadas da Serra Gaucha para que cada marca que criamos carregue verdade de origem — nao apenas um rotulo bonito, mas um vinho de carater."
+                "Nascemos da convicção de que vinhos extraordinários merecem nomes extraordinários. Trabalhamos lado a lado com as vinícolas mais respeitadas da Serra Gaúcha para que cada marca que criamos carregue verdade de origem — não apenas um rótulo bonito, mas um vinho de caráter."
               }
             </motion.p>
 
@@ -495,7 +495,7 @@ export default function Fold3Manifesto() {
                   : { duration: 1.1, delay: 0.2, ease: EASE }
               }
             >
-              {"Nao criamos rotulos. Construimos "}
+              {"Não criamos rótulos. Construímos "}
               <span className="text-[#BF8C60]">{"marcas"}</span>
               {" que merecem durar."}
             </motion.p>
@@ -518,7 +518,7 @@ export default function Fold3Manifesto() {
                   : { duration: 0.7, delay: 0.5, ease: EASE }
               }
             >
-              {"— Adega Propria"}
+              {"— Adega Própria"}
             </motion.p>
           </motion.div>
         </div>
