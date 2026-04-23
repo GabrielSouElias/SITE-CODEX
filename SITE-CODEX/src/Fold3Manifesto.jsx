@@ -93,7 +93,7 @@ function EditorialImage({ image, isDesktop, prefersReducedMotion }) {
   return (
     <motion.figure
       ref={imageRef}
-      className="group relative aspect-[4/5] overflow-hidden rounded-[0.65rem] bg-[#2A1416] lg:aspect-[3/4]"
+      className="group relative isolate aspect-[4/5] overflow-hidden rounded-[0.65rem] bg-[#2A1416] lg:aspect-[3/4]"
       initial={
         prefersReducedMotion ? false : { opacity: 0, scale: 1.05 }
       }
@@ -141,7 +141,6 @@ function EditorialImage({ image, isDesktop, prefersReducedMotion }) {
             "linear-gradient(to top, rgba(26,15,16,0.5) 0%, transparent 100%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[#BF8C60]/8" />
     </motion.figure>
   );
 }
