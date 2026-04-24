@@ -6,10 +6,18 @@
   color-scheme: dark;
 }
 
+html,
+body,
+#root,
+#__next {
+  overflow-x: clip;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
+}
+
 html {
   background: #1a0f10;
-  max-width: 100%;
-  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -18,19 +26,24 @@ body {
   min-width: 320px;
   background: #1a0f10;
   color: #d9bba9;
-  max-width: 100%;
-  overflow-x: hidden;
 }
 
-body,
-#root {
+#root,
+#root > * {
   min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
 }
 
-* {
+@media (max-width: 1023px) {
+  html,
+  body {
+    overflow-x: clip !important;
+    overscroll-behavior-x: none;
+  }
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 

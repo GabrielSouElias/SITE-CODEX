@@ -4,7 +4,6 @@ import {
   useScroll,
   useTransform,
   useSpring,
-  useInView,
   AnimatePresence,
 } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -44,10 +43,6 @@ export default function Fold1Hero() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [showMobileBar, setShowMobileBar] = useState(false);
-
-  const isHeroInView = useInView(heroRef, {
-    amount: 0.2,
-  });
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -98,12 +93,49 @@ export default function Fold1Hero() {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      setShowMobileBar(!isDesktop && !isHeroInView && latest > 0.82);
-    });
+    if (typeof window === "undefined") return undefined;
 
-    return () => unsubscribe();
-  }, [scrollYProgress, isDesktop, isHeroInView]);
+    const hero = heroRef.current;
+    if (!hero) return undefined;
+
+    let heroRatio = 1;
+    let fold4Visible = false;
+
+    const update = () => {
+      setShowMobileBar(heroRatio < 0.25 && !fold4Visible);
+    };
+
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        heroRatio = entry.intersectionRatio;
+        update();
+      },
+      {
+        threshold: [0, 0.1, 0.2, 0.25, 0.3, 0.5, 0.75, 1],
+      }
+    );
+    heroObserver.observe(hero);
+
+    const fold4 = document.getElementById("fold-4");
+    let fold4Observer;
+    if (fold4) {
+      fold4Observer = new IntersectionObserver(
+        ([entry]) => {
+          fold4Visible = entry.isIntersecting;
+          update();
+        },
+        {
+          threshold: [0, 0.05, 0.1, 0.2],
+        }
+      );
+      fold4Observer.observe(fold4);
+    }
+
+    return () => {
+      heroObserver.disconnect();
+      if (fold4Observer) fold4Observer.disconnect();
+    };
+  }, []);
 
   const scrollToNextFold = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -168,15 +200,15 @@ export default function Fold1Hero() {
           <motion.div
             className={`${
               isDesktop && !prefersReducedMotion ? "fixed" : "absolute"
-            } inset-[-10%]`}
-            style={backgroundMotionStyle}
+            } inset-0 overflow-hidden`}
           >
-            <img
+            <motion.img
               src={HERO_BG_MOBILE}
               srcSet={`${HERO_BG_MOBILE} 900w, ${HERO_BG_DESKTOP} 1600w`}
               sizes="100vw"
               alt={"Adega de vinhos finos"}
-              className="absolute inset-0 h-full w-full object-cover brightness-[0.42] contrast-[1.08] saturate-[0.72] sepia-[0.22]"
+              className="absolute inset-0 h-full w-full scale-[1.08] object-cover brightness-[0.42] contrast-[1.08] saturate-[0.72] sepia-[0.22] md:scale-[1.04] lg:scale-[1.12]"
+              style={backgroundMotionStyle}
               loading="eager"
               fetchPriority="high"
               decoding="async"
@@ -193,7 +225,7 @@ export default function Fold1Hero() {
           <div className="absolute inset-x-0 top-0 h-[34vh] bg-gradient-to-b from-[#1A0F10]/55 to-transparent" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,rgba(26,15,16,0.84)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(26,15,16,0.78)_0%,rgba(42,20,22,0.3)_42%,rgba(140,61,32,0.16)_100%)]" />
-          <div className="absolute left-1/2 top-1/2 h-[22rem] w-[24rem] -translate-x-1/2 -translate-y-[42%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(191,140,96,0.08)_0%,transparent_72%)] blur-3xl md:h-[24rem] md:w-[34rem] xl:h-[32rem] xl:w-[48rem]" />
+          <div className="absolute left-1/2 top-1/2 h-[22rem] w-[92vw] max-w-[24rem] -translate-x-1/2 -translate-y-[42%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(191,140,96,0.08)_0%,transparent_72%)] blur-3xl md:h-[24rem] md:w-[34rem] md:max-w-none xl:h-[32rem] xl:w-[48rem]" />
           <div className="absolute bottom-0 left-0 right-0 h-[15rem] bg-[radial-gradient(ellipse_at_bottom,rgba(166,44,33,0.08)_0%,transparent_72%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(42,20,22,0.12)_65%,rgba(42,20,22,0.34)_100%)]" />
         </div>
@@ -348,21 +380,22 @@ export default function Fold1Hero() {
       </section>
 
       <AnimatePresence>
-        {showMobileBar ? (
+        {showMobileBar && (
           <motion.div
-            className="pb-safe fixed inset-x-0 bottom-0 z-[70] px-4 pt-2 lg:hidden"
-            initial={prefersReducedMotion ? false : { y: 100, opacity: 0 }}
+            key="sticky-whatsapp-bar"
+            initial={prefersReducedMotion ? false : { y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={
-              prefersReducedMotion ? { opacity: 0 } : { y: 120, opacity: 0 }
+              prefersReducedMotion ? { opacity: 0 } : { y: 80, opacity: 0 }
             }
             transition={
               prefersReducedMotion
                 ? { duration: 0 }
                 : { duration: 0.4, ease: EASE }
             }
+            className="pb-safe fixed inset-x-0 bottom-0 z-[70] overflow-hidden px-4 pt-2 lg:hidden"
           >
-            <div className="rounded-[1.75rem] border border-[#BF8C60]/10 bg-[#1A0F10]/88 p-2 shadow-[0_-20px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+            <div className="overflow-hidden rounded-[1.75rem] border border-[#BF8C60]/10 bg-[#1A0F10]/88 p-2 shadow-[0_-20px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
               <Button
                 asChild
                 className="font-body group h-14 w-full rounded-full border border-[#BF8C60]/35 bg-[#BF8C60] text-base font-semibold text-[#1A0F10] transition-all duration-300 active:scale-[0.98] active:bg-[#8C3D20] active:text-[#D9BBA9] focus-visible:ring-2 focus-visible:ring-[#BF8C60] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A0F10]"
@@ -380,7 +413,7 @@ export default function Fold1Hero() {
               </Button>
             </div>
           </motion.div>
-        ) : null}
+        )}
       </AnimatePresence>
     </>
   );

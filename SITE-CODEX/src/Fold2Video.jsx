@@ -151,14 +151,14 @@ export default function Fold2Video() {
           className="pointer-events-none absolute inset-0 z-0"
         >
           <div
-            className="absolute left-1/2 top-1/2 h-[420px] w-[92vw] max-w-[700px] -translate-x-1/2 -translate-y-1/2 lg:h-[600px] lg:w-[1000px] lg:max-w-none"
+            className="absolute left-1/2 top-1/2 h-[420px] w-[92vw] max-w-[700px] -translate-x-1/2 -translate-y-1/2 lg:h-[600px] lg:w-[88vw] lg:max-w-[1000px]"
             style={{
               background:
                 "radial-gradient(ellipse at center, rgba(166,44,33,0.08) 0%, transparent 65%)",
             }}
           />
           <div
-            className="absolute right-0 top-1/4 h-[320px] w-[52vw] max-w-[320px] lg:h-[400px] lg:w-[400px] lg:max-w-none"
+            className="absolute right-0 top-1/4 h-[320px] w-[52vw] max-w-[320px] lg:h-[400px] lg:w-[34vw] lg:max-w-[400px]"
             style={{
               background:
                 "radial-gradient(ellipse at 80% 50%, rgba(140,61,32,0.05) 0%, transparent 60%)",
